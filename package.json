@@ -22,6 +22,7 @@
   "homepage": "https://github.com/dtavana/discord-steam-link#readme",
   "dependencies": {
     "btoa": "^1.2.1",
+    "ejs": "^2.7.1",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "js-yaml": "^3.13.1",
@@ -32,6 +33,7 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.1",
+    "@types/express-session": "^1.15.15",
     "@types/mongodb": "^3.3.6",
     "@types/mongoose": "^5.5.22"
   }

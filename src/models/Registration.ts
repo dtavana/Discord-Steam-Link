@@ -7,16 +7,12 @@ interface IRegistration extends Document {
 }
 
 const RegistrationSchema: Schema = new Schema({
-    createdAt: { type: Date, required: false },
     discordId: { type: String, required: true, unique: true },
     steamId: { type: String, required: true, unique: true },
-});
-RegistrationSchema.pre<IRegistration>("save", function (next) {
-    const now = new Date();
-    if (!this.registeredAt) {
-        this.registeredAt = now;
-    }
-    next();
+    steamName: { type: String, required: true, unique: true },
+    discordName: { type: String, required: true, unique: true },
+    steamAvatar: { type: String, required: false, unique: true },
+    discordAvatar: { type: String, required: false, unique: true },
 });
 
 export const Registration: Model<IRegistration> = model<IRegistration>("Registration", RegistrationSchema);

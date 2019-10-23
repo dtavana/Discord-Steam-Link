@@ -48,7 +48,7 @@ app.use(routes);
 app.locals.config = config;
 app.locals.db = init(config);
 app.set('view engine', 'ejs');
-app.use('/static', express.static(resolve(__dirname, 'public')));
+app.set('views', resolve(__dirname, '../src', 'views'));
 app.listen(
     config.PORT,
     () => console.log(`Discord Steam Link now listening on port ${config.PORT}`),
