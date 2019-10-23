@@ -1,10 +1,55 @@
-<!doctype html>
-<html lang="en-US">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>Let's Use EJS</title>
+    <meta charset="utf-8">
+    <title>Control Panel</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800"
+          rel="stylesheet">
+
+    <!-- Bootstrap CSS File -->
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Libraries CSS Files -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <!-- Main Stylesheet File -->
+    <link href="css/style.css" rel="stylesheet">
 </head>
+
 <body>
-    <h1>Learning To Use EJS</h1>
-    <p>The time now is: <%= data.steamId %></p>
+<section id="cp">
+    <% if (data) { %>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="section-title">Control Panel</h3>
+
+                <div class="section-title-divider"></div>
+            </div>
+        </div>
+        <div class="accounts">
+            <div class="account-item">
+                <div class="account-icon-steam"><i class="fab fa-steam-symbol"></i></div>
+                <h4 class="account-title">Steam Account</h4>
+                <p class="account-description">Name: <%= data.steamName %> <br>SteamID: <%= data.steamId %></p>            </div>
+            <div class="account-item">
+                <div class="account-icon-discord"><i class="fab fa-discord"></i></div>
+                <h4 class="account-title">Discord Account</h4>
+                <p class="account-description">Name: <%= data.discordName %><br>Discord ID: <%= data.discordId %></p>            </div>
+        </div>
+    </div>
+    <% } %>
+</section>
+
+<!-- JavaScript Libraries -->
+<script src="lib/jquery/jquery.min.js"></script>
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/cp.js"></script>
 </body>
+
 </html>

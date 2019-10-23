@@ -32,6 +32,15 @@ export const callback = async(req, res) => {
         });
     const userJson = await userRes.json();
     const { id: discordId, username, discriminator, avatar } = userJson;
+    await fetch(`${req.app.locals.config.DISCORD_API_BASE}guilds/${req.app.locals.config.GUILD_ID}/members/${discordId}`,
+        {
+            method: 'PUT',
+            body: JSON.stringify({ access_token }),
+            headers: {
+                Authorization: `Bot NjI1NzEzNDY2MDAyMzc0NjU3.XbCaMg.erDyQMbA4xxtCbMPfc453RThyK8`,
+                'Content-Type': 'application/json'
+            },
+        });
     const exists = await Registration.findOne({ discordId });
     if(exists) {
         req.session.authenticatedData = exists;
