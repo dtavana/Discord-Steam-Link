@@ -1,5 +1,6 @@
 import btoa from 'btoa';
 import fetch from 'node-fetch';
+import moment from "moment";
 import {Registration} from "../models/Registration";
 export const startAuthentication = async(req, res) => {
     const {PORT, DISCORD_CLIENT_ID} = req.app.locals.config;
@@ -37,13 +38,24 @@ export const callback = async(req, res) => {
             method: 'PUT',
             body: JSON.stringify({ access_token }),
             headers: {
-                Authorization: `Bot NjI1NzEzNDY2MDAyMzc0NjU3.XbCaMg.erDyQMbA4xxtCbMPfc453RThyK8`,
+                Authorization: `Bot ${req.app.locals.config.BOT_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+        });
+    await fetch(`${req.app.locals.config.DISCORD_API_BASE}guilds/${req.app.locals.config.GUILD_ID}/members/${discordId}/roles/${req.app.locals.config.ROLE_ID}`,
+        {
+            method: 'PUT',
+            body: JSON.stringify({ access_token }),
+            headers: {
+                Authorization: `Bot ${req.app.locals.config.BOT_TOKEN}`,
                 'Content-Type': 'application/json'
             },
         });
     const exists = await Registration.findOne({ discordId });
     if(exists) {
+        const {registeredAt} = exists;
         req.session.authenticatedData = exists;
+        req.session.authenticatedData['registeredAtString'] = moment(registeredAt).fromNow(false);
         res.redirect('/');
     } else {
         req.session.discordData = {
