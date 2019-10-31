@@ -1,7 +1,7 @@
 import express from 'express';
-import {renderView} from "../controllers/views.controller";
+import {unlink} from "../../controllers/auth.controller";
 
 const router = express.Router();
-router.get('/', renderView);
+router.get('/', unlink);
 
 export default router;
