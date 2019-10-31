@@ -22,15 +22,7 @@
 
 <body>
 <section id="cp">
-    <% if (data) { %>
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h3 class="section-title">Control Panel</h3>
-
-                <div class="section-title-divider"></div>
-            </div>
-        </div>
         <div class="accounts">
             <div class="account-item">
                 <div class="account-icon-steam"><i class="fab fa-steam-symbol"></i></div>
@@ -42,7 +34,6 @@
                 <p class="account-description">Name: <%= data.discordName %><br>Discord ID: <%= data.discordId %></p>            </div>
         </div>
     </div>
-    <% } %>
 </section>
 
 <!-- JavaScript Libraries -->
