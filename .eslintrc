@@ -1,0 +1,24 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint", "prettier"],
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript"
+    ],
+    "rules": {
+        "no-unmodified-loop-condition": 2,
+        "no-console": 1,
+        "prettier/prettier": 2,
+        "@typescript-eslint/explicit-function-return-type": 0,
+        "lines-between-class-members": 0,
+        "@typescript-eslint/no-non-null-assertion": 0,
+        "@typescript-eslint/no-explicit-any": 0,
+        "import/no-named-as-default": 0
+    }
+}
