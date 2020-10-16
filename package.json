@@ -1,7 +1,7 @@
 {
     "name": "discord-steam-link",
     "version": "0.1.0",
-    "description": "Link discord and steam account and save to a MongoDB",
+    "description": "Link discord and steam account and save to MongoDB",
     "main": "app.ts",
     "scripts": {
         "build": "npm run lint && rm -rf dist && tsc",
