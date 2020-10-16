@@ -21,7 +21,6 @@
     "homepage": "https://github.com/dtavana/discord-steam-link#readme",
     "dependencies": {
         "ejs": "^2.7.4",
-        "ejs-lint": "^0.3.0",
         "express": "^4.17.1",
         "express-session": "^1.17.1",
         "js-yaml": "^3.14.0",
@@ -48,12 +47,6 @@
         "lint-staged": "^10.2.11",
         "prettier": "^2.0.5",
         "typescript": "^3.9.7"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged",
-            "post-commit": "git update-index --again"
-        }
     },
     "lint-staged": {
         "*.{ts,json}": [
