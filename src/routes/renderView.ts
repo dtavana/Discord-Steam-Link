@@ -1,7 +1,7 @@
-import express from 'express';
-import {renderView} from "../controllers/views.controller";
+import express from "express";
+import { renderView } from "../controllers/views.controller";
 
 const router = express.Router();
-router.get('/', renderView);
+router.get("/", renderView);
 
 export default router;
