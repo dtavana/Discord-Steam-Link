@@ -5,6 +5,7 @@ import unlink from "./unlink";
 import discordAuthenticated from "../../middleware/discordAuthenticated";
 
 const router = express.Router();
+router.use("/", discord);
 router.use("/discord", discord);
 router.use("/steam", discordAuthenticated, steam);
 router.use("/unlink", discordAuthenticated, unlink);
