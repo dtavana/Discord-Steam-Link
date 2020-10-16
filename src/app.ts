@@ -5,7 +5,7 @@ import { safeLoad } from "js-yaml";
 import Config from "./interfaces/Config";
 import routes from "./routes";
 import { resolve } from "path";
-import { init } from "./controllers/db";
+import { init } from "./utils/db";
 import passport from "passport";
 import { Strategy } from "passport-steam";
 import session from "express-session";
