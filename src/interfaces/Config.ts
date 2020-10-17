@@ -11,4 +11,5 @@ export default interface Config {
     DISCORD_API_BASE: string;
     STEAM_API_KEY: string;
     SECRET: string;
+    DOMAIN: string;
 }

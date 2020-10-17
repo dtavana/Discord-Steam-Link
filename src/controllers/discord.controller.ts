@@ -2,21 +2,17 @@ import { URLSearchParams } from "url";
 import fetch from "node-fetch";
 import moment from "moment";
 import { Registration } from "../models/Registration";
+import { getDiscordCallback } from "../utils/getCallback";
 export const startAuthentication = async (req, res) => {
-    const { PORT, DISCORD_CLIENT_ID } = req.app.locals.config;
-    const redirect = encodeURIComponent(
-        `http://localhost:${PORT}/auth/discord/callback`
-    );
-    const authString = `https://discordapp.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&scope=identify%20guilds.join&response_type=code&redirect_uri=${redirect}`;
+    const { DISCORD_CLIENT_ID } = req.app.locals.config;
+    const authString = `https://discordapp.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&scope=identify%20guilds.join&response_type=code&redirect_uri=${getDiscordCallback(
+        req.app.locals.config
+    )}`;
     res.redirect(authString);
 };
 
 export const callback = async (req, res) => {
-    const {
-        PORT,
-        DISCORD_CLIENT_ID,
-        DISCORD_CLIENT_SECRET
-    } = req.app.locals.config;
+    const { DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET } = req.app.locals.config;
     const { code } = req.query;
     const options = {
         method: "POST",
@@ -28,10 +24,7 @@ export const callback = async (req, res) => {
     params.append("code", code);
     params.append("grant_type", "authorization_code");
     params.append("scope", "identify guilds.join");
-    params.append(
-        "redirect_uri",
-        `http://localhost:${PORT}/auth/discord/callback`
-    );
+    params.append("redirect_uri", getDiscordCallback(req.app.locals.config));
     options.body = params;
     const tokenRes = await fetch(
         `https://discordapp.com/api/oauth2/token`,
@@ -73,20 +66,27 @@ export const callback = async (req, res) => {
             }
         }
     );
-    const exists = await Registration.findOne({ discordId });
-    if (exists) {
-        const { registeredAt } = exists;
-        req.session.authenticatedData = exists;
-        req.session.authenticatedData["registeredAtString"] = moment(
-            registeredAt
-        ).fromNow(false);
-        res.redirect("/");
-    } else {
-        req.session.discordData = {
-            discordId,
-            discordName: `${username}#${discriminator}`,
-            discordAvatar: `https://cdn.discordapp.com/avatars/${discordId}/${avatar}`
-        };
-        res.redirect("/auth/steam");
-    }
+
+    const { steamId, steamName, steamAvatar } = req.session.steamData;
+    req.session.discordData = {
+        discordId,
+        discordName: `${username}#${discriminator}`,
+        discordAvatar: `https://cdn.discordapp.com/avatars/${discordId}/${avatar}`
+    };
+    const registeredAt = new Date();
+    const data = {
+        steamId,
+        discordId,
+        steamName,
+        discordName: req.session.discordData.discordName,
+        steamAvatar,
+        discordAvatar: req.session.discordData.discordAvatar,
+        registeredAt
+    };
+    await Registration.create(data);
+    req.session.authenticatedData = data;
+    req.session.authenticatedData["registeredAtString"] = moment(
+        registeredAt
+    ).fromNow(false);
+    res.redirect("/");
 };

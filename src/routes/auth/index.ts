@@ -2,12 +2,12 @@ import express from "express";
 import discord from "./discord";
 import steam from "./steam";
 import unlink from "./unlink";
-import discordAuthenticated from "../../middleware/discordAuthenticated";
+import steamAuthenticated from "../../middleware/steamAuthenticated";
 
 const router = express.Router();
-router.use("/", discord);
-router.use("/discord", discord);
-router.use("/steam", discordAuthenticated, steam);
-router.use("/unlink", discordAuthenticated, unlink);
+router.use("/", steam);
+router.use("/steam", steam);
+router.use("/discord", steamAuthenticated, discord);
+router.use("/unlink", steamAuthenticated, unlink);
 
 export default router;

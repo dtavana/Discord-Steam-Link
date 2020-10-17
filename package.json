@@ -20,6 +20,7 @@
     "license": "MIT",
     "homepage": "https://github.com/dtavana/discord-steam-link#readme",
     "dependencies": {
+        "axios": "^0.20.0",
         "ejs": "^2.7.4",
         "express": "^4.17.1",
         "express-session": "^1.17.1",
