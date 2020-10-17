@@ -1,8 +1,8 @@
 import { URLSearchParams } from "url";
-import fetch from "node-fetch";
 import moment from "moment";
 import { Registration } from "../models/Registration";
 import { getDiscordCallback } from "../utils/getCallback";
+
 export const startAuthentication = async (req, res) => {
     const { DISCORD_CLIENT_ID } = req.app.locals.config;
     const authString = `https://discordapp.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&scope=identify%20guilds.join&response_type=code&redirect_uri=${getDiscordCallback(
