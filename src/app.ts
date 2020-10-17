@@ -10,6 +10,7 @@ import passport from "passport";
 import { Strategy as SteamStrategy } from "passport-steam";
 import session from "express-session";
 import { getSteamCallback } from "./utils/getCallback";
+import Axios from "axios";
 
 const config: Config = safeLoad(readFileSync("config.yml", "utf8"));
 
@@ -22,6 +23,9 @@ app.use(
 );
 app.locals.config = config;
 app.locals.db = init(config);
+app.locals.dapi = Axios.create({
+    baseURL: config.DISCORD_API_BASE
+});
 
 passport.serializeUser((user, done) => {
     done(null, user._json);
