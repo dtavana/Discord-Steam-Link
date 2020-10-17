@@ -1,6 +1,6 @@
-import {Document, Model, model, Schema} from "mongoose";
+import { Document, Model, model, Schema } from "mongoose";
 
-interface IRegistration extends Document {
+interface Registration extends Document {
     discordId: string;
     steamId: string;
     steamName: string;
@@ -17,7 +17,10 @@ const RegistrationSchema: Schema = new Schema({
     discordName: { type: String, required: true, unique: false },
     steamAvatar: { type: String, required: false, unique: false },
     discordAvatar: { type: String, required: false, unique: false },
-    registeredAt: { type: Date, required: true, unique: false },
+    registeredAt: { type: Date, required: true, unique: false }
 });
 
-export const Registration: Model<IRegistration> = model<IRegistration>("Registration", RegistrationSchema);
+export const Registration: Model<Registration> = model<Registration>(
+    "Registration",
+    RegistrationSchema
+);
